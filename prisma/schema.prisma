@@ -1,0 +1,29 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+// prisma/schema.prisma
+datasource db {
+  provider  = "postgresql"
+  url  	    = env("DATABASE_URL")
+  // uncomment next line if you use Prisma <5.10
+  // directUrl = env("DATABASE_URL_UNPOOLED")
+}
+
+model Student {
+  id            Int            @id @default(autoincrement())
+  name          String
+  studentclass  Int
+  detail        StudentDetail?
+}
+
+model StudentDetail {
+  id           Int     @id @default(autoincrement())
+  name         String
+  img_url      String
+  father_name  String
+  mother_name  String
+  phone_number String
+  student      Student @relation(fields: [studentId], references: [id])
+  studentId    Int     @unique
+}
