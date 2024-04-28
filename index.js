@@ -4,9 +4,8 @@ const { PrismaClient } = require("@prisma/client");
 const app = express();
 const prisma = new PrismaClient();
 
-app.use(express.json()); // Middleware to parse JSON bodies
+app.use(express.json()); 
 
-// GET endpoint to fetch all students
 app.get("/", async (req, res) => {
     try {
         const students = await prisma.student.findMany();
